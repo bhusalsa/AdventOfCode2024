@@ -8,10 +8,10 @@ public class Day3 {
     public static void main(String[] args) throws IOException {
         StringBuilder sb = parser(fileLocation);
         String text = sb.toString();
-        String[] instructions = unCorrupt(text);
-        int sum = multiply(instructions);
-
+        int sum = multiply(unCorrupt(text));
         System.out.println("Sum of all multiplication is: " + sum);
+        int sum2 = multiply(unCorrupt(instructionUncorrupt(text)));
+        System.out.println("Sum of enabled multiplication is: " + sum2);
     }
 
     private static int multiply(String[] instructions) {
@@ -19,10 +19,23 @@ public class Day3 {
         for (String instruction : instructions) {
             int firstNum =  Integer.parseInt(instruction.split(",")[0]);
             int secondNum = Integer.parseInt(instruction.split(",")[1]);
-            System.out.println(firstNum + " * " + secondNum);
+            //System.out.println(firstNum + " * " + secondNum);
             sum += mul(firstNum, secondNum);
         }
         return sum;
+    }
+
+    private static String instructionUncorrupt(String corrupted) {
+        String[] instructions = new String[3];
+        String instruction = null;
+        String[] dos = corrupted.split("do\\(\\)", -1);
+        for (int i = 0; i < dos.length; i++) {
+            System.out.println(dos[i]);
+            String line = dos[i].split("don't\\(\\)")[0];
+            instruction += line;
+        }
+
+        return instruction;
     }
 
     private static String[] unCorrupt(String corrupted) {
@@ -45,18 +58,8 @@ public class Day3 {
         return mul.toArray(new String[0]);
     }
 
-
     private static int mul(int a, int b) {
         return a * b;
-    }
-
-    private static int sumArray(int[] numbers)
-    {
-        int sum = 0;
-        for (int i = 0; i < numbers.length; i++) {
-            sum += numbers[i];
-        }
-        return sum;
     }
 
     private static StringBuilder parser(String filelocation) throws IOException {
