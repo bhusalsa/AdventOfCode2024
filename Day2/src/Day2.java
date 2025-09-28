@@ -20,7 +20,7 @@ public class Day2 {
         System.out.println("Combined safe/dampened reports: " + (safe + dampened));
     }
 
-    public static StringBuilder parser(String filename) throws IOException {
+    private static StringBuilder parser(String filename) throws IOException {
         FileReader fr = new FileReader(filename);
         BufferedReader br = new BufferedReader(fr);
         String line;

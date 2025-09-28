@@ -11,7 +11,7 @@ public class CreateList {
     static int[] listB = new int[size];
 
 
-    public void parser(String filelocation) throws IOException {
+    protected void parser(String filelocation) throws IOException {
         FileReader fr = new FileReader(filelocation);
         BufferedReader br = new BufferedReader(fr);
         String line;
